@@ -1,4 +1,4 @@
-# react-portfolio
+# internshiptask2
 
 My personal portfolio website, made with React and Bootstrap for task 2 of my front-end internship.
 
@@ -18,8 +18,8 @@ My personal portfolio website, made with React and Bootstrap for task 2 of my fr
 You need Node.js (version 18 or newer).
 
 ```bash
-git clone https://github.com/pranuthi777/react-portfolio.git
-cd react-portfolio
+git clone https://github.com/pranuthi777/internshiptask2.git
+cd internshiptask2
 npm install
 npm run dev
 ```
