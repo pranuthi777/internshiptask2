@@ -23,8 +23,9 @@ export default function App() {
   const [theme, setTheme] = useState(getSavedTheme);
   const [projects, setProjects] = useState(initialProjects);
 
+  // Bootstrap 5.3 switches all its colours with the data-bs-theme attribute
   useEffect(() => {
-    document.documentElement.dataset.theme = theme;
+    document.documentElement.setAttribute('data-bs-theme', theme);
     try {
       localStorage.setItem('theme', theme);
     } catch {

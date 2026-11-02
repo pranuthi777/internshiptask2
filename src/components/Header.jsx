@@ -1,7 +1,6 @@
 import { useContext, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { ThemeContext } from '../context';
-import { CloseIcon, MenuIcon, MoonIcon, SunIcon } from './Icons';
 
 const links = [
   { to: '/', label: 'Home' },
@@ -15,47 +14,55 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header className="header">
-      <div className="container header-inner">
-        <Link to="/" className="logo" onClick={() => setMenuOpen(false)}>
-          <span className="logo-mark">P</span>
+    <nav className="navbar navbar-expand-md bg-body-tertiary border-bottom sticky-top shadow-sm">
+      <div className="container">
+        <Link className="navbar-brand fw-bold" to="/" onClick={() => setMenuOpen(false)}>
+          <i className="bi bi-code-slash text-primary me-2"></i>
           Pranuthi
         </Link>
 
-        <nav className={menuOpen ? 'nav open' : 'nav'} id="main-nav">
-          {links.map((link) => (
-            <NavLink
-              key={link.to}
-              to={link.to}
-              end={link.to === '/'}
-              onClick={() => setMenuOpen(false)}
-            >
-              {link.label}
-            </NavLink>
-          ))}
-        </nav>
+        <button
+          className="navbar-toggler"
+          type="button"
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-controls="navbarNav"
+          aria-expanded={menuOpen}
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
+        </button>
 
-        <div className="header-buttons">
-          <button
-            type="button"
-            className="icon-button"
-            onClick={toggleTheme}
-            aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
-          >
-            {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
-          </button>
-          <button
-            type="button"
-            className="icon-button menu-button"
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-            aria-expanded={menuOpen}
-            aria-controls="main-nav"
-          >
-            {menuOpen ? <CloseIcon /> : <MenuIcon />}
-          </button>
+        <div className={menuOpen ? 'collapse navbar-collapse show' : 'collapse navbar-collapse'} id="navbarNav">
+          <ul className="navbar-nav ms-auto align-items-md-center">
+            {links.map((link) => (
+              <li className="nav-item" key={link.to}>
+                <NavLink
+                  className="nav-link"
+                  to={link.to}
+                  end={link.to === '/'}
+                  onClick={() => setMenuOpen(false)}
+                >
+                  {link.label}
+                </NavLink>
+              </li>
+            ))}
+            <li className="nav-item ms-md-3 mt-2 mt-md-0">
+              <button
+                type="button"
+                className="btn btn-outline-secondary btn-sm"
+                onClick={toggleTheme}
+                aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+              >
+                {theme === 'dark' ? (
+                  <i className="bi bi-sun-fill"></i>
+                ) : (
+                  <i className="bi bi-moon-stars-fill"></i>
+                )}
+              </button>
+            </li>
+          </ul>
         </div>
       </div>
-    </header>
+    </nav>
   );
 }

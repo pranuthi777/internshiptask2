@@ -1,28 +1,22 @@
-import { skillGroups } from '../data/skills';
+import { skills } from '../data/skills';
 
 export default function Skills() {
   return (
-    <section className="section container">
-      <div className="section-head">
-        <div>
-          <p className="kicker">Skills</p>
-          <h2>What I work with</h2>
+    <section className="py-5">
+      <div className="container">
+        <h2 className="section-title text-center">Skills</h2>
+        <div className="row row-cols-2 row-cols-sm-3 row-cols-lg-5 g-3 mt-2">
+          {skills.map((skill) => (
+            <div className="col" key={skill.name}>
+              <div className="card skill-card h-100 text-center shadow-sm">
+                <div className="card-body">
+                  <i className={`${skill.icon} skill-icon`}></i>
+                  <p className="mb-0 mt-2 fw-semibold">{skill.name}</p>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
-      </div>
-
-      <div className="skill-grid">
-        {skillGroups.map((group, index) => (
-          <div key={group.title} className="skill-card">
-            <span className="skill-number">0{index + 1}</span>
-            <h3>{group.title}</h3>
-            <p>{group.description}</p>
-            <ul className="chips">
-              {group.skills.map((skill) => (
-                <li key={skill}>{skill}</li>
-              ))}
-            </ul>
-          </div>
-        ))}
       </div>
     </section>
   );

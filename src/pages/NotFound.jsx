@@ -5,13 +5,14 @@ export default function NotFound() {
   usePageTitle('Not found');
 
   return (
-    <section className="section container page-top not-found">
-      <p className="big-number">404</p>
-      <h1>Page not found</h1>
-      <p className="lead">There’s nothing at this address.</p>
-      <Link to="/" className="button primary">
-        Back to home
-      </Link>
+    <section className="py-5 text-center">
+      <div className="container py-5">
+        <h1 className="display-1 fw-bold text-primary">404</h1>
+        <p className="fs-4">Oops! Page not found.</p>
+        <Link to="/" className="btn btn-primary">
+          Go Home
+        </Link>
+      </div>
     </section>
   );
 }

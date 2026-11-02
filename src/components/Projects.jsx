@@ -2,7 +2,6 @@ import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ProjectsContext } from '../context';
 import { categories } from '../data/projects';
-import { ArrowIcon } from './Icons';
 import ProjectCard from './ProjectCard';
 
 // On the home page (showAll = false) only starred projects are shown, without filters.
@@ -29,66 +28,82 @@ export default function Projects({ showAll = false }) {
   }
 
   return (
-    <section className="section container">
-      <div className="section-head">
-        <div>
-          <p className="kicker">Projects</p>
-          {showAll ? <h1>Things I’ve built</h1> : <h2>Selected work</h2>}
-        </div>
-        {!showAll && (
-          <Link to="/projects" className="arrow-link">
-            All projects <ArrowIcon />
-          </Link>
+    <section className="py-5 bg-body-tertiary">
+      <div className="container">
+        {showAll ? (
+          <h1 className="section-title text-center">My Projects</h1>
+        ) : (
+          <h2 className="section-title text-center">Projects</h2>
         )}
-      </div>
 
-      {showAll && (
-        <div className="filters">
-          <div className="filter-buttons">
-            {categories.map((c) => (
+        {showAll && (
+          <div className="row g-3 justify-content-between align-items-center my-3">
+            <div className="col-md-auto">
+              <div className="btn-group flex-wrap" role="group" aria-label="Filter projects">
+                {categories.map((c) => (
+                  <button
+                    key={c.value}
+                    type="button"
+                    className={category === c.value ? 'btn btn-primary' : 'btn btn-outline-primary'}
+                    onClick={() => setCategory(c.value)}
+                  >
+                    {c.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div className="col-md-4">
+              <div className="input-group">
+                <span className="input-group-text">
+                  <i className="bi bi-search"></i>
+                </span>
+                <input
+                  type="search"
+                  className="form-control"
+                  placeholder="Search projects..."
+                  aria-label="Search projects"
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                />
+              </div>
+            </div>
+          </div>
+        )}
+
+        {shown.length === 0 ? (
+          <div className="alert alert-secondary text-center mt-4">
+            No projects found.{' '}
+            {showAll && (
               <button
-                key={c.value}
                 type="button"
-                className={category === c.value ? 'active' : ''}
-                onClick={() => setCategory(c.value)}
+                className="btn btn-link p-0 align-baseline"
+                onClick={() => {
+                  setCategory('all');
+                  setSearch('');
+                }}
               >
-                {c.label}
+                Show all
               </button>
+            )}
+          </div>
+        ) : (
+          <div className="row row-cols-1 row-cols-md-2 g-4 mt-1 justify-content-center">
+            {shown.map((project) => (
+              <div className="col" key={project.id}>
+                <ProjectCard project={project} onStar={toggleStar} />
+              </div>
             ))}
           </div>
-          <input
-            type="search"
-            placeholder="Search by name or language…"
-            aria-label="Search projects"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
-        </div>
-      )}
+        )}
 
-      {shown.length === 0 ? (
-        <div className="empty">
-          <p>No projects match that.</p>
-          {showAll && (
-            <button
-              type="button"
-              className="button outline"
-              onClick={() => {
-                setCategory('all');
-                setSearch('');
-              }}
-            >
-              Show all projects
-            </button>
-          )}
-        </div>
-      ) : (
-        <div className="project-grid">
-          {shown.map((project) => (
-            <ProjectCard key={project.id} project={project} onStar={toggleStar} />
-          ))}
-        </div>
-      )}
+        {!showAll && (
+          <div className="text-center mt-4">
+            <Link to="/projects" className="btn btn-outline-primary">
+              View All Projects
+            </Link>
+          </div>
+        )}
+      </div>
     </section>
   );
 }

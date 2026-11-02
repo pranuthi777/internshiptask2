@@ -1,20 +1,13 @@
-export const skillGroups = [
-  {
-    title: 'Building',
-    description: 'What I use to make websites.',
-    skills: ['HTML', 'CSS', 'JavaScript', 'React', 'React Router', 'Responsive design'],
-  },
-  {
-    title: 'Tools',
-    description: 'What I use every day while working.',
-    skills: ['Git', 'GitHub', 'VS Code', 'Vite', 'Vercel', 'Chrome DevTools'],
-  },
-  {
-    title: 'Learning',
-    description: 'What I’m getting better at right now.',
-    skills: ['Java', 'Accessibility', 'REST APIs', 'Testing'],
-  },
+// icon classes come from devicon (https://devicon.dev)
+export const skills = [
+  { name: 'HTML5', icon: 'devicon-html5-plain colored' },
+  { name: 'CSS3', icon: 'devicon-css3-plain colored' },
+  { name: 'JavaScript', icon: 'devicon-javascript-plain colored' },
+  { name: 'React', icon: 'devicon-react-original colored' },
+  { name: 'Bootstrap', icon: 'devicon-bootstrap-plain colored' },
+  { name: 'Java', icon: 'devicon-java-plain colored' },
+  { name: 'Git', icon: 'devicon-git-plain colored' },
+  { name: 'GitHub', icon: 'devicon-github-original' },
+  { name: 'Vite', icon: 'devicon-vitejs-plain colored' },
+  { name: 'VS Code', icon: 'devicon-vscode-plain colored' },
 ];
-
-// shown in the scrolling strip under the hero
-export const techStrip = ['React', 'JavaScript', 'HTML', 'CSS', 'React Router', 'Vite', 'Git', 'Java'];

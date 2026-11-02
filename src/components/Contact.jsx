@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { profile } from '../data/profile';
-import { ArrowIcon } from './Icons';
 
 const emptyForm = { name: '', email: '', subject: '', message: '' };
 
@@ -10,11 +9,11 @@ function validate(form) {
   if (form.email.trim() === '') {
     errors.email = 'Please enter your email.';
   } else if (!/^\S+@\S+\.\S{2,}$/.test(form.email.trim())) {
-    errors.email = 'Please enter a valid email, like name@example.com.';
+    errors.email = 'Please enter a valid email address.';
   }
-  if (form.subject.trim() === '') errors.subject = 'Please add a subject.';
+  if (form.subject.trim() === '') errors.subject = 'Please enter a subject.';
   if (form.message.trim().length < 10) {
-    errors.message = 'Your message should be at least 10 characters.';
+    errors.message = 'Message must be at least 10 characters.';
   }
   return errors;
 }
@@ -44,7 +43,7 @@ export default function Contact() {
     setTouched({ name: true, email: true, subject: true, message: true });
     if (Object.keys(newErrors).length > 0) return;
 
-    // the site has no backend, so this opens the visitor's email app with everything filled in
+    // no backend, so this opens the visitor's email app with everything filled in
     const body = `${form.message}\n\n${form.name} (${form.email})`;
     window.location.href = `mailto:${profile.email}?subject=${encodeURIComponent(
       form.subject,
@@ -52,21 +51,25 @@ export default function Contact() {
     setSent(true);
   }
 
-  function showError(field) {
-    return touched[field] && errors[field];
+  // Bootstrap shows the red border + message when the input has "is-invalid"
+  function inputClass(field) {
+    return touched[field] && errors[field] ? 'form-control is-invalid' : 'form-control';
   }
 
   if (sent) {
     return (
-      <div className="form-card sent">
-        <h3>Thanks, {form.name.split(' ')[0]}!</h3>
+      <div className="alert alert-success" role="status">
+        <h5 className="alert-heading">Thanks, {form.name.split(' ')[0]}!</h5>
         <p>
-          Your email app should have opened with your message ready to send. If it didn’t, you can
-          email me at <a href={`mailto:${profile.email}`}>{profile.email}</a>.
+          Your email app should have opened with your message. If it didn’t, email me at{' '}
+          <a href={`mailto:${profile.email}`} className="alert-link">
+            {profile.email}
+          </a>
+          .
         </p>
         <button
           type="button"
-          className="button outline"
+          className="btn btn-success btn-sm"
           onClick={() => {
             setForm(emptyForm);
             setTouched({});
@@ -74,75 +77,89 @@ export default function Contact() {
             setSent(false);
           }}
         >
-          Write another message
+          Send another message
         </button>
       </div>
     );
   }
 
   return (
-    <form className="form-card" onSubmit={handleSubmit} noValidate>
-      <div className="form-row">
-        <div className={showError('name') ? 'field has-error' : 'field'}>
-          <label htmlFor="name">Name</label>
+    <form className="card card-body shadow-sm p-4" onSubmit={handleSubmit} noValidate>
+      <div className="row g-3">
+        <div className="col-md-6">
+          <label htmlFor="name" className="form-label">
+            Name
+          </label>
           <input
             id="name"
             name="name"
+            className={inputClass('name')}
+            placeholder="Your name"
             autoComplete="name"
             value={form.name}
             onChange={handleChange}
             onBlur={handleBlur}
-            aria-invalid={Boolean(showError('name'))}
           />
-          {showError('name') && <p className="error">{errors.name}</p>}
+          <div className="invalid-feedback">{errors.name}</div>
         </div>
 
-        <div className={showError('email') ? 'field has-error' : 'field'}>
-          <label htmlFor="email">Email</label>
+        <div className="col-md-6">
+          <label htmlFor="email" className="form-label">
+            Email
+          </label>
           <input
             id="email"
             name="email"
             type="email"
+            className={inputClass('email')}
+            placeholder="name@example.com"
             autoComplete="email"
             value={form.email}
             onChange={handleChange}
             onBlur={handleBlur}
-            aria-invalid={Boolean(showError('email'))}
           />
-          {showError('email') && <p className="error">{errors.email}</p>}
+          <div className="invalid-feedback">{errors.email}</div>
+        </div>
+
+        <div className="col-12">
+          <label htmlFor="subject" className="form-label">
+            Subject
+          </label>
+          <input
+            id="subject"
+            name="subject"
+            className={inputClass('subject')}
+            placeholder="What is this about?"
+            value={form.subject}
+            onChange={handleChange}
+            onBlur={handleBlur}
+          />
+          <div className="invalid-feedback">{errors.subject}</div>
+        </div>
+
+        <div className="col-12">
+          <label htmlFor="message" className="form-label">
+            Message
+          </label>
+          <textarea
+            id="message"
+            name="message"
+            rows="5"
+            className={inputClass('message')}
+            placeholder="Write your message here..."
+            value={form.message}
+            onChange={handleChange}
+            onBlur={handleBlur}
+          ></textarea>
+          <div className="invalid-feedback">{errors.message}</div>
+        </div>
+
+        <div className="col-12">
+          <button type="submit" className="btn btn-primary px-4">
+            <i className="bi bi-send me-2"></i>Send Message
+          </button>
         </div>
       </div>
-
-      <div className={showError('subject') ? 'field has-error' : 'field'}>
-        <label htmlFor="subject">Subject</label>
-        <input
-          id="subject"
-          name="subject"
-          value={form.subject}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          aria-invalid={Boolean(showError('subject'))}
-        />
-        {showError('subject') && <p className="error">{errors.subject}</p>}
-      </div>
-
-      <div className={showError('message') ? 'field has-error' : 'field'}>
-        <label htmlFor="message">Message</label>
-        <textarea
-          id="message"
-          name="message"
-          rows="6"
-          value={form.message}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          aria-invalid={Boolean(showError('message'))}
-        />
-        {showError('message') && <p className="error">{errors.message}</p>}
-      </div>
-
-      <button type="submit" className="button primary">
-        Send message <ArrowIcon />
-      </button>
     </form>
   );
 }

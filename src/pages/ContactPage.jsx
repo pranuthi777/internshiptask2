@@ -1,5 +1,4 @@
 import Contact from '../components/Contact';
-import { ExternalIcon } from '../components/Icons';
 import { profile } from '../data/profile';
 import usePageTitle from './usePageTitle';
 
@@ -7,31 +6,40 @@ export default function ContactPage() {
   usePageTitle('Contact');
 
   return (
-    <section className="section container page-top">
-      <div className="contact-grid">
-        <div>
-          <p className="kicker">Contact</p>
-          <h1 className="page-title">Let’s talk</h1>
-          <p className="lead">
-            Whether it’s a project, an internship or just a question about something I’ve built,
-            I’d love to hear from you.
-          </p>
+    <section className="py-5">
+      <div className="container">
+        <h1 className="section-title text-center">Contact Me</h1>
+        <p className="text-center text-body-secondary mb-5">
+          Have a question or want to work together? Send me a message!
+        </p>
 
-          <div className="contact-list">
-            <div>
-              <span>Email</span>
-              <a href={`mailto:${profile.email}`}>{profile.email}</a>
+        <div className="row g-4">
+          <div className="col-lg-4">
+            <div className="card shadow-sm mb-3">
+              <div className="card-body d-flex align-items-center">
+                <i className="bi bi-envelope-fill fs-3 text-primary me-3"></i>
+                <div className="text-break">
+                  <h6 className="mb-0">Email</h6>
+                  <a href={`mailto:${profile.email}`}>{profile.email}</a>
+                </div>
+              </div>
             </div>
-            <div>
-              <span>GitHub</span>
-              <a href={profile.github} target="_blank" rel="noreferrer">
-                github.com/pranuthi777 <ExternalIcon />
-              </a>
+            <div className="card shadow-sm">
+              <div className="card-body d-flex align-items-center">
+                <i className="bi bi-github fs-3 text-primary me-3"></i>
+                <div>
+                  <h6 className="mb-0">GitHub</h6>
+                  <a href={profile.github} target="_blank" rel="noreferrer">
+                    pranuthi777
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
+          <div className="col-lg-8">
+            <Contact />
+          </div>
         </div>
-
-        <Contact />
       </div>
     </section>
   );

@@ -1,0 +1,91 @@
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+.section-title {
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+/* little line under each section heading */
+.section-title::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 4px;
+  margin: 10px auto 0;
+  border-radius: 2px;
+  background-color: var(--bs-primary);
+}
+
+.navbar .nav-link.active {
+  color: var(--bs-primary) !important;
+  font-weight: 600;
+}
+
+/* hero */
+.hero {
+  background-image: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%);
+}
+
+.avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 130px;
+  height: 130px;
+  border: 5px solid rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  background-color: #fff;
+  color: var(--bs-primary);
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+.avatar-lg {
+  width: 220px;
+  height: 220px;
+  border-color: var(--bs-primary-border-subtle);
+  font-size: 5rem;
+}
+
+.about-preview {
+  max-width: 700px;
+}
+
+/* skills */
+.skill-card {
+  transition: transform 0.2s;
+}
+
+.skill-card:hover {
+  transform: translateY(-5px);
+}
+
+.skill-icon {
+  font-size: 3rem;
+}
+
+/* projects */
+.project-card {
+  overflow: hidden;
+  transition: transform 0.2s;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+}
+
+.project-card .card-img-top {
+  height: 230px;
+  object-fit: cover;
+  object-position: top;
+}
+
+.star-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 36px;
+  height: 36px;
+}

@@ -1,6 +1,6 @@
 # react-portfolio
 
-My personal portfolio site, made with React for task 2 of my front-end internship.
+My personal portfolio website, made with React and Bootstrap for task 2 of my front-end internship.
 
 **Live site:** https://react-portfolio-zeta-azure.vercel.app
 
@@ -8,9 +8,9 @@ My personal portfolio site, made with React for task 2 of my front-end internshi
 
 - Pages for Home, About, Projects and Contact, using React Router (plus a "page not found" page)
 - Components for the header, hero, projects, skills, contact form and footer
-- Projects are kept in state, so you can star them, filter them by type and search them
+- Projects are kept in state, so you can star them, filter them and search them
 - A contact form that checks the name, email and message before sending
-- A dark/light mode button that remembers your choice
+- A dark/light mode button that remembers your choice (uses Bootstrap's `data-bs-theme`)
 - Works on phones, tablets and desktops
 
 ## Running it locally
@@ -32,16 +32,15 @@ To make a production build, run `npm run build`. The files end up in `dist/`.
 
 ```
 src/
-  components/   Header, Hero, Projects, ProjectCard, Skills, Contact, Footer, Layout, Icons
+  components/   Header, Hero, Projects, ProjectCard, Skills, Contact, Footer, Layout
   pages/        one file per route
   data/         my profile text, projects and skills
-  public/projects/  project screenshots
   context.js    theme and projects context
   App.jsx       routes and app state
-  index.css     all the styles
+  App.css       my custom styles (on top of Bootstrap)
 ```
 
-To change the content, edit the files in `src/data/`.
+To change the content, edit the files in `src/data/`. Project screenshots go in `public/projects/`.
 
 ## Notes
 
@@ -52,4 +51,4 @@ To change the content, edit the files in `src/data/`.
 
 ## Built with
 
-React, React Router, Vite, plain CSS
+React, React Router, Bootstrap 5, Bootstrap Icons, Devicon, Vite
