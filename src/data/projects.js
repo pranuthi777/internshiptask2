@@ -19,7 +19,7 @@ export const initialProjects = [
     description:
       'The site you’re on. Built with React and React Router as my second internship task — my first real React project.',
     tags: ['React', 'React Router', 'Vite'],
-    liveUrl: '',
+    liveUrl: 'https://react-portfolio-zeta-azure.vercel.app',
     repoUrl: 'https://github.com/pranuthi777/react-portfolio',
     starred: true,
   },

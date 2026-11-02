@@ -2,7 +2,7 @@
 
 My personal portfolio site, made with React for task 2 of my front-end internship.
 
-**Live site:** coming soon
+**Live site:** https://react-portfolio-zeta-azure.vercel.app
 
 ## What's in it
 
