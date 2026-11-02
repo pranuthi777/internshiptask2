@@ -1,39 +1,35 @@
 export const initialProjects = [
   {
-    id: 'landing-page',
+    id: 'ridgeway',
     title: 'Ridgeway Instrument Co.',
     year: 2026,
     category: 'web',
     description:
-      'Landing page for a made-up company that repairs field instruments. Plain HTML, CSS and JavaScript, no frameworks. My first internship task.',
+      'A landing page for a made-up company that builds and repairs field instruments. Written in plain HTML, CSS and JavaScript with no frameworks, and fully responsive.',
     tags: ['HTML', 'CSS', 'JavaScript'],
+    image: '/projects/ridgeway.jpg',
     liveUrl: 'https://pranuthi777.github.io/landing-page-project/',
     repoUrl: 'https://github.com/pranuthi777/landing-page-project',
     starred: true,
   },
   {
-    id: 'react-portfolio',
-    title: 'This portfolio',
-    year: 2026,
-    category: 'web',
-    description:
-      'The site you’re on. Built with React and React Router as my second internship task — my first real React project.',
-    tags: ['React', 'React Router', 'Vite'],
-    liveUrl: 'https://react-portfolio-zeta-azure.vercel.app',
-    repoUrl: 'https://github.com/pranuthi777/react-portfolio',
-    starred: true,
-  },
-  {
     id: 'csci-1105',
-    title: 'CSCI 1105 exercises',
+    title: 'CSCI 1105 Java exercises',
     year: 2026,
     category: 'java',
     description:
-      'Small Java programs from my intro programming course, like practising the Math class and seeing how integer and decimal division differ.',
+      'Small Java programs from my intro to programming course — practising the Math class, rounding, and the difference between integer and decimal division.',
     tags: ['Java'],
+    code: [
+      'double result6 = (1 - 2) / 5.0;  // -0.2',
+      'double result7 = (1 - 2) / 5;    // 0.0',
+      '',
+      'double max = Math.max(Math.max(3, 5), 7);',
+      'System.out.println("8. " + max);',
+    ],
     liveUrl: '',
     repoUrl: '',
-    starred: false,
+    starred: true,
   },
 ];
 

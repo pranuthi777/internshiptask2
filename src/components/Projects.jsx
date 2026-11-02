@@ -2,8 +2,10 @@ import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ProjectsContext } from '../context';
 import { categories } from '../data/projects';
+import { ArrowIcon } from './Icons';
+import ProjectCard from './ProjectCard';
 
-// On the home page (showAll = false) only starred projects are shown.
+// On the home page (showAll = false) only starred projects are shown, without filters.
 export default function Projects({ showAll = false }) {
   const { projects, toggleStar } = useContext(ProjectsContext);
   const [category, setCategory] = useState('all');
@@ -27,24 +29,36 @@ export default function Projects({ showAll = false }) {
   }
 
   return (
-    <section className="section">
-      {showAll ? <h1>Projects</h1> : <h2>Some things I’ve made</h2>}
+    <section className="section container">
+      <div className="section-head">
+        <div>
+          <p className="kicker">Projects</p>
+          {showAll ? <h1>Things I’ve built</h1> : <h2>Selected work</h2>}
+        </div>
+        {!showAll && (
+          <Link to="/projects" className="arrow-link">
+            All projects <ArrowIcon />
+          </Link>
+        )}
+      </div>
 
       {showAll && (
         <div className="filters">
-          {categories.map((c) => (
-            <button
-              key={c.value}
-              type="button"
-              className={category === c.value ? 'active' : ''}
-              onClick={() => setCategory(c.value)}
-            >
-              {c.label}
-            </button>
-          ))}
+          <div className="filter-buttons">
+            {categories.map((c) => (
+              <button
+                key={c.value}
+                type="button"
+                className={category === c.value ? 'active' : ''}
+                onClick={() => setCategory(c.value)}
+              >
+                {c.label}
+              </button>
+            ))}
+          </div>
           <input
             type="search"
-            placeholder="Search by name or language"
+            placeholder="Search by name or language…"
             aria-label="Search projects"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
@@ -52,44 +66,29 @@ export default function Projects({ showAll = false }) {
         </div>
       )}
 
-      {shown.length === 0 && <p className="muted">Nothing here yet.</p>}
-
-      <ul className="project-list">
-        {shown.map((project) => (
-          <li key={project.id} className="project">
-            <div className="project-head">
-              <h3>{project.title}</h3>
-              <span className="muted">{project.year}</span>
-              <button
-                type="button"
-                className={project.starred ? 'star starred' : 'star'}
-                aria-label={project.starred ? `Unstar ${project.title}` : `Star ${project.title}`}
-                onClick={() => toggleStar(project.id)}
-              >
-                {project.starred ? '★' : '☆'}
-              </button>
-            </div>
-            <p>{project.description}</p>
-            <p className="tags">{project.tags.join(' · ')}</p>
-            {(project.liveUrl || project.repoUrl) && (
-              <p className="project-links">
-                {project.liveUrl && (
-                  <a href={project.liveUrl} target="_blank" rel="noreferrer">
-                    Live site ↗
-                  </a>
-                )}
-                {project.repoUrl && (
-                  <a href={project.repoUrl} target="_blank" rel="noreferrer">
-                    Code ↗
-                  </a>
-                )}
-              </p>
-            )}
-          </li>
-        ))}
-      </ul>
-
-      {!showAll && <Link to="/projects">All projects →</Link>}
+      {shown.length === 0 ? (
+        <div className="empty">
+          <p>No projects match that.</p>
+          {showAll && (
+            <button
+              type="button"
+              className="button outline"
+              onClick={() => {
+                setCategory('all');
+                setSearch('');
+              }}
+            >
+              Show all projects
+            </button>
+          )}
+        </div>
+      ) : (
+        <div className="project-grid">
+          {shown.map((project) => (
+            <ProjectCard key={project.id} project={project} onStar={toggleStar} />
+          ))}
+        </div>
+      )}
     </section>
   );
 }

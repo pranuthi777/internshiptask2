@@ -7,11 +7,31 @@ export default function About() {
 
   return (
     <>
-      <section className="section">
-        <h1>About me</h1>
-        {profile.about.map((paragraph) => (
-          <p key={paragraph}>{paragraph}</p>
-        ))}
+      <section className="section container page-top">
+        <p className="kicker">About</p>
+        <h1 className="page-title">A bit about me</h1>
+
+        <div className="about-grid">
+          <div className="about-text">
+            {profile.about.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
+          </div>
+
+          <aside className="facts-card">
+            <div className="avatar" aria-hidden="true">
+              PG
+            </div>
+            <dl>
+              {profile.facts.map((fact) => (
+                <div key={fact.label}>
+                  <dt>{fact.label}</dt>
+                  <dd>{fact.value}</dd>
+                </div>
+              ))}
+            </dl>
+          </aside>
+        </div>
       </section>
       <Skills />
     </>

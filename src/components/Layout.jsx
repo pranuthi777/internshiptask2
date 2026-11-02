@@ -12,12 +12,12 @@ export default function Layout() {
   }, [pathname]);
 
   return (
-    <div className="page">
+    <>
       <Header />
       <main>
         <Outlet />
       </main>
       <Footer />
-    </div>
+    </>
   );
 }

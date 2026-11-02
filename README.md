@@ -32,9 +32,10 @@ To make a production build, run `npm run build`. The files end up in `dist/`.
 
 ```
 src/
-  components/   Header, Hero, Projects, Skills, Contact, Footer, Layout
+  components/   Header, Hero, Projects, ProjectCard, Skills, Contact, Footer, Layout, Icons
   pages/        one file per route
   data/         my profile text, projects and skills
+  public/projects/  project screenshots
   context.js    theme and projects context
   App.jsx       routes and app state
   index.css     all the styles
